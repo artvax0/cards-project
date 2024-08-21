@@ -1,10 +1,10 @@
 import React from 'react'
-import Form from '../../forms/components/Form'
-import Input from '../../forms/components/Input'
-import { ROUTES } from '../../routes/routesModel'
 import { Link } from 'react-router-dom'
 import { Button, Grid } from '@mui/material'
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import Form from './Form'
+import Input from './Input';
+import { ROUTES } from '../../routes/routesModel';
 
 export default function LoginForm({
     onSubmit,

@@ -7,6 +7,7 @@ import { useCurrentUser } from '../providers/UserProvider';
 import useForm from '../hooks/useForm';
 import initialLoginForm from '../helpers/initialForms/initialLoginForm';
 import loginSchema from '../models/loginSchema';
+import LoginForm from '../components/forms/LoginForm';
 
 export default function LoginPage() {
   const { user } = useCurrentUser();

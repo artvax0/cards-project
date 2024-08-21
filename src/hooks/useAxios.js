@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { useCurrentUser } from "../users/providers/UserProvider";
 import axios from "axios";
+import { useCurrentUser } from "../providers/UserProvider";
 
 export default function useAxios() {
   const { token } = useCurrentUser();
