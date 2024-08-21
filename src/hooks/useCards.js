@@ -11,6 +11,7 @@ export default function useCards() {
     const [error, setError] = useState();
     const setSnack = useSnack();
     const [card, setCard] = useState([]);
+    useAxios();
 
     const getAllCards = useCallback(async () => {
         try {
@@ -34,6 +35,21 @@ export default function useCards() {
         setIsLoading(false);
     }, []);
 
+    const handleNewCard = useCallback(async (newCardInfo) => {
+        setIsLoading(true);
+        try {
+            const normalizedCardInfo = normalizeCard(newCardInfo);
+            const response = await newCard(normalizedCardInfo);
+            if (response.status == 200) {
+                setSnack('success', 'Added Card!');
+            }
+        } catch (error) {
+            setError(error.message);
+            setSnack('error', error.message);
+        }
+        setIsLoading(false);
+    })
+
     const handleDelete = (id) => {
         console.log(`Delete ${id}`);
     }
@@ -42,5 +58,5 @@ export default function useCards() {
         console.log(`Liking ${id}`);
     }
 
-    return {allCards, card, error, isLoading, getAllCards, getCardById, handleDelete, handleLike };
+    return {allCards, card, error, isLoading, getAllCards, getCardById, handleNewCard, handleDelete, handleLike };
 }

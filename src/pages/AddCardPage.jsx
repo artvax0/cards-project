@@ -7,15 +7,13 @@ import { useCurrentUser } from '../providers/UserProvider';
 import useForm from '../hooks/useForm';
 import initialCardForm from '../helpers/initialForms/initialCardForm';
 import cardSchema from '../models/cardSchema';
+import useCards from '../hooks/useCards';
 
 export default function AddCardPage() {
     // send viewer home if not logged in
     const { user } = useCurrentUser();
+    const { handleNewCard } = useCards();
     if (!user) return <Navigate to={ROUTES.LOGIN} replace />
-
-    const handleNewCard = () => {
-        console.log(data)
-    }
 
     const { data, errors, handleChange, handleReset, validateForm, onSubmit } = useForm(initialCardForm, cardSchema, handleNewCard);
     return (
