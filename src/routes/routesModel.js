@@ -8,5 +8,6 @@ export const ROUTES = {
     LOGIN:'/login',
     SIGNUP:'/signup',
     CARD_INFO: '/card-info',
-    NEW_CARD: '/new-card'
+    NEW_CARD: '/new-card',
+    EDIT_CARD: '/edit-card',
 }

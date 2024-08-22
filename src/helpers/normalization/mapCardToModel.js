@@ -1,4 +1,5 @@
-const mapCardToModel = (card) => ({
+const mapCardToModel = (card) => {
+    return ({
     title: card.title,
     subtitle: card.subtitle,
     description: card.description,
@@ -13,4 +14,7 @@ const mapCardToModel = (card) => ({
     street: card.address.street,
     houseNumber: card.address.houseNumber,
     zip: card.address.zip,
-})
+    })
+}
+
+export default mapCardToModel;

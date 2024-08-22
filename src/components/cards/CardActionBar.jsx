@@ -3,19 +3,21 @@ import { Delete as DeleteIcon, Edit as EditIcon, Phone as PhoneIcon, Favorite as
 import React from 'react'
 import { useCurrentUser } from '../../providers/UserProvider';
 
-export default function CardActionBar({ handleDel, handleLike, handleEdit }) {
-    const user = useCurrentUser();
+export default function CardActionBar({ handleDel, handleLike, handleEdit, cardId, userId }) {
+    const { user } = useCurrentUser();
 
     return (
         <>
             <CardActions sx={{ justifyContent: 'space-between' }}>
                 <Box>
-                    <IconButton aria-label='delete' onClick={handleDel}>
+                    {/* Detect if user is admin or owner if card - display delete icon */}
+                    {(user && user.isAdmin) || (user && user._id == userId) ? (<IconButton aria-label='delete' onClick={handleDel}>
                         <DeleteIcon />
-                    </IconButton>
-                    <IconButton aria-label='edit' onClick={handleEdit}>
+                    </IconButton>) : null}
+                    {/* Detect if user is admin or owner if card - display edit icon */}
+                    {(user && user.isAdmin) || (user && user._id == userId) ? (<IconButton aria-label='edit' onClick={handleEdit}>
                         <EditIcon />
-                    </IconButton>
+                    </IconButton>) : null}
                 </Box>
                 <Box>
                     <IconButton aria-label='call'>

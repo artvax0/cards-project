@@ -10,7 +10,7 @@ export default function AddNewCardButton() {
 
     return (
         <>
-            {user ? <Button onClick={() => navigate(ROUTES.NEW_CARD)} variant='contained' sx={{ aspectRatio: '1/1', borderRadius: '50%', position: 'fixed', bottom: '75px', right: '17px', fontSize: '1.5rem' }}>+</Button > : null}
+            {user && user.isBusiness ? <Button onClick={() => navigate(ROUTES.NEW_CARD)} variant='contained' sx={{ aspectRatio: '1/1', borderRadius: '50%', position: 'fixed', bottom: '75px', right: '17px', fontSize: '1.5rem' }}>+</Button > : null}
         </>
 
     )
