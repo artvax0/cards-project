@@ -12,7 +12,7 @@ export default function SignupForm({
   errors,
   data,
   onInputChange,
-  handleChangeCheckBox,
+  handleChangeCheckbox,
 }) {
   const { isDark } = useTheme();
   return (
@@ -146,9 +146,9 @@ export default function SignupForm({
       />
       <Grid item>
         <FormControlLabel
-          onChange={handleChangeCheckBox}
+          onChange={handleChangeCheckbox}
           name="isBusiness"
-          control={<Checkbox value={data.isBusiness} color="primary" />}
+          control={<Checkbox checked={data.isBusiness} color="primary" />}
           label="Signup as business"
           sx={{ color: isDark ? '#EEE' : '#000' }}
         />

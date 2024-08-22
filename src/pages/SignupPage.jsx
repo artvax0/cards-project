@@ -12,7 +12,7 @@ import SignupForm from "../components/forms/SignupForm";
 export default function SignupPage() {
   const { user } = useCurrentUser();
   if (user) return <Navigate to={ROUTES.ROOT} replace />;
-  const { isLoading, handleRegister } = useUsers();
+  const { handleRegister } = useUsers();
 
   const {
     data,
@@ -21,7 +21,7 @@ export default function SignupPage() {
     handleReset,
     validateForm,
     onSubmit,
-    handleChangeCheckBox,
+    handleChangeCheckbox,
   } = useForm(initialSignupForm, signupSchema, handleRegister);
 
   return (
@@ -41,7 +41,7 @@ export default function SignupPage() {
         errors={errors}
         data={data}
         onInputChange={handleChange}
-        handleChangeCheckBox={handleChangeCheckBox}
+        handleChangeCheckbox={handleChangeCheckbox}
       />
     </Container>
   );
