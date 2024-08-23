@@ -27,21 +27,21 @@ export default function CardsDetailsPage() {
     <>
       <PageHeader title="Previewing card" subtitle={id} />
       <Paper sx={{ backgroundColor: isDark ? '#000' : '#EEE', display: 'flex', gap: 3, mx: 7, borderRadius: 5 }}>
-        <Box component='img' src={card[0].image.url} alt={card[0].image.alt} sx={{ width: '50%', borderRadius: 5 }} />
+        <Box component='img' src={card.image.url} alt={card.image.alt} sx={{ width: '50%', borderRadius: 5 }} />
         <Box flexGrow={1} sx={{ display: 'flex', flexDirection: 'column' }}>
           <Box flexGrow={2}>
-            <Typography variant='h3'>{card[0].title}</Typography>
-            <Typography variant='subtitle1' gutterBottom sx={{ fontWeight: 'bold' }}>{card[0].subtitle}</Typography>
+            <Typography variant='h3'>{card.title}</Typography>
+            <Typography variant='subtitle1' gutterBottom sx={{ fontWeight: 'bold' }}>{card.subtitle}</Typography>
             <Divider variant='middle' />
-            <Typography gutterBottom>{card[0].description}</Typography>
-            <Typography gutterBottom>Email: {card[0].email}</Typography>
-            <Typography gutterBottom>Address: {card[0].address.street} {card[0].address.houseNumber}, {card[0].address.city}, {card[0].address.country}</Typography>
-            <Typography>Website: <Link href="#">{card[0].web}</Link></Typography>
+            <Typography gutterBottom>{card.description}</Typography>
+            <Typography gutterBottom>Email: {card.email}</Typography>
+            <Typography gutterBottom>Address: {card.address.street} {card.address.houseNumber}, {card.address.city}, {card.address.country}</Typography>
+            <Typography>Website: <Link href="#">{card.web}</Link></Typography>
           </Box>
           <Box>
             <Divider variant='middle' />
             <Container sx={{ display: 'flex', justifyContent: 'center' }}>
-              <Typography sx={{ color: favoriteColor, fontWeight: 'bold' }}>{card[0].likes.length}&nbsp;</Typography>
+              <Typography sx={{ color: favoriteColor, fontWeight: 'bold' }}>{card.likes.length}&nbsp;</Typography>
               <FavoriteIcon sx={{ color: favoriteColor }} />
             </Container>
           </Box>
