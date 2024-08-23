@@ -9,7 +9,6 @@ import { useCurrentUser } from '../providers/UserProvider';
 export default function CardsPage() {
   const { allCards, error, isLoading, getAllCards, handleDelete, handleLike } = useCards();
   const { isDark } = useTheme();
-  const { user } = useCurrentUser();
   useEffect(() => {
     getAllCards();
   }, []);
