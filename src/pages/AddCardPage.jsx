@@ -13,7 +13,7 @@ export default function AddCardPage() {
     // send viewer home if not logged in
     const { user } = useCurrentUser();
     const { handleNewCard } = useCards();
-    if (!user) return <Navigate to={ROUTES.LOGIN} replace />
+    if (!user.isBusiness) return <Navigate to={ROUTES.LOGIN} replace />
 
     const { data, errors, handleChange, handleReset, validateForm, onSubmit } = useForm(initialCardForm, cardSchema, handleNewCard);
     return (
