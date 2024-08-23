@@ -10,7 +10,7 @@ export default function UserProvider({ children }) {
     useEffect(() => {
         if (!user) {
             const userFromLocalStorage = getUser();
-            setUser(userFromLocalStorage);
+            if (userFromLocalStorage) setUser(userFromLocalStorage);
         }
     }, [user]);
 

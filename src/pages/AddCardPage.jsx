@@ -10,12 +10,11 @@ import cardSchema from '../models/cardSchema';
 import useCards from '../hooks/useCards';
 
 export default function AddCardPage() {
-    // send viewer home if not logged in
     const { user } = useCurrentUser();
     const { handleNewCard } = useCards();
-    if (!user.isBusiness || !user.isAdmin) return <Navigate to={ROUTES.ROOT} replace />
 
     const { data, errors, handleChange, handleReset, validateForm, onSubmit } = useForm(initialCardForm, cardSchema, handleNewCard);
+    if (user && !user.isBusiness) return <Navigate to={ROUTES.ROOT} replace />
     return (
         <Container
             sx={{

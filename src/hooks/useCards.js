@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react"
 import { useSnack } from "../providers/SnackbarProvider";
 import axios from 'axios'
-import { deleteCard, editCard, newCard } from "../services/cardApiService";
+import { getAllMyCards, deleteCard, editCard, newCard } from "../services/cardApiService";
 import normalizeCard from "../helpers/normalization/normalizeCard";
 import useAxios from "./useAxios";
 import { useNavigate } from "react-router-dom";
@@ -39,6 +39,20 @@ export default function useCards() {
         setIsLoading(false);
     }, []);
 
+    const getMyCards = useCallback(async () => {
+        try {
+            const response = await getAllMyCards();
+            if (response.status >= 200 && response.status < 300) {
+                setAllCards(response.data);
+                setSnack('success', 'Loaded All Personal Cards!');
+            }
+        } catch (error) {
+            setError(error.message);
+            setSnack('error', error.message);
+        }
+        setIsLoading(false);
+    }, []);
+
     const handleNewCard = useCallback(async (newCardInfo) => {
         setIsLoading(true);
         try {
@@ -56,7 +70,7 @@ export default function useCards() {
             setSnack('error', error.message);
         }
         setIsLoading(false);
-    },[])
+    },[]);
 
     const handleEditCard = useCallback(async (cardId, updatedCardInfo) => {
         setIsLoading(true);
@@ -75,7 +89,7 @@ export default function useCards() {
             setSnack('error', error.message);
         }
         setIsLoading(false)
-    },[])
+    },[]);
 
     const handleDelete = useCallback(async (cardId, bizNumber) => {
         try {
@@ -91,11 +105,11 @@ export default function useCards() {
             setError(error.message);
             setSnack('error', error.message);
         }
-    },[])
+    },[]);
 
     const handleLike = (id) => {
         console.log(`Liking ${id}`);
     }
 
-    return {allCards, card, error, isLoading, getAllCards, getCardById, handleNewCard, handleEditCard, handleDelete, handleLike };
+    return {allCards, card, error, isLoading, getAllCards, getCardById, getMyCards, handleNewCard, handleEditCard, handleDelete, handleLike };
 }

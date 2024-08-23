@@ -26,3 +26,11 @@ export const deleteCard = async (cardId, bizNumber) => {
     throw new Error (error.response.data);
   }
 }
+
+export const getAllMyCards = async () => {
+  try {
+    return await axios.get(apiUrl + `/my-cards`);
+  } catch (error) {
+    throw new Error (error.response.data);
+  }
+}
