@@ -16,7 +16,6 @@ export default function CardsPage() {
 
   return (
     <>
-      {console.log(user)}
       <PageHeader
         title='Cards'
         subtitle='On this page you can find all business cards from all categories'

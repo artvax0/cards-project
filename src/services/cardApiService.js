@@ -15,6 +15,14 @@ export const editCard = async (cardId, normalizedCardInfo) => {
     const response = await axios.put(apiUrl + `/${cardId}`, normalizedCardInfo);
     return response;
   } catch (error) {
-    throw new Error (error.response.data)
+    throw new Error (error.response.data);
+  }
+}
+
+export const deleteCard = async (cardId, bizNumber) => {
+  try {
+    return await axios.delete(apiUrl + `/${cardId}`, {"bizNumber": bizNumber});
+  } catch (error) {
+    throw new Error (error.response.data);
   }
 }

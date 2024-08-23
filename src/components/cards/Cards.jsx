@@ -16,7 +16,7 @@ export default function Cards({ cards, handleDelete, handleLike }) {
         <CardComponent
           card={card}
           key={card._id}
-          handleDel={() => handleDelete(card._id)}
+          handleDel={() => handleDelete(card._id, card.bizNumber)}
           handleEdit={() => handleEdit(card._id)}
           handleLike={() => handleLike(card._id)}
         />

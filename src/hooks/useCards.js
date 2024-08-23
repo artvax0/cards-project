@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react"
 import { useSnack } from "../providers/SnackbarProvider";
 import axios from 'axios'
-import { editCard, newCard } from "../services/cardApiService";
+import { deleteCard, editCard, newCard } from "../services/cardApiService";
 import normalizeCard from "../helpers/normalization/normalizeCard";
 import useAxios from "./useAxios";
 import { useNavigate } from "react-router-dom";
@@ -56,7 +56,7 @@ export default function useCards() {
             setSnack('error', error.message);
         }
         setIsLoading(false);
-    })
+    },[])
 
     const handleEditCard = useCallback(async (cardId, updatedCardInfo) => {
         setIsLoading(true);
@@ -75,11 +75,23 @@ export default function useCards() {
             setSnack('error', error.message);
         }
         setIsLoading(false)
-    })
+    },[])
 
-    const handleDelete = (id) => {
-        console.log(`Delete ${id}`);
-    }
+    const handleDelete = useCallback(async (cardId, bizNumber) => {
+        try {
+            const response = await deleteCard(cardId, bizNumber);
+
+            if (response.status >= 200 && response.status < 300) {
+                setSnack('success', 'Card Deleted!');
+                setTimeout(() => {
+                    location.reload();
+                }, 1500);
+            }
+        } catch (error) {
+            setError(error.message);
+            setSnack('error', error.message);
+        }
+    },[])
 
     const handleLike = (id) => {
         console.log(`Liking ${id}`);
