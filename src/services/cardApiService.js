@@ -1,6 +1,14 @@
 import axios from "axios";
 const apiUrl = "https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards";
 
+export const getCards = async () => {
+  try {
+    return await axios.get(apiUrl);
+  } catch (error) {
+    throw new Error(error.response.data);
+  }
+}
+
 export const newCard = async (normalizedCardInfo) => {
   try {
     const response = await axios.post(apiUrl, normalizedCardInfo);
@@ -30,6 +38,14 @@ export const deleteCard = async (cardId, bizNumber) => {
 export const getAllMyCards = async () => {
   try {
     return await axios.get(apiUrl + `/my-cards`);
+  } catch (error) {
+    throw new Error (error.response.data);
+  }
+}
+
+export const likeCard = async (cardId) => {
+  try {
+    return await axios.patch(apiUrl + `/${cardId}`);
   } catch (error) {
     throw new Error (error.response.data);
   }

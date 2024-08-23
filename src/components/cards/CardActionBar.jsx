@@ -1,10 +1,18 @@
 import { Box, CardActions, IconButton } from '@mui/material'
 import { Delete as DeleteIcon, Edit as EditIcon, Phone as PhoneIcon, Favorite as FavoriteIcon } from '@mui/icons-material';
-import React from 'react'
+import React, { useState } from 'react'
 import { useCurrentUser } from '../../providers/UserProvider';
+import { pink } from '@mui/material/colors';
 
-export default function CardActionBar({ handleDel, handleLike, handleEdit, cardId, userId }) {
+export default function CardActionBar({ handleDel, handleLike, handleEdit, likes, cardId, userId }) {
     const { user } = useCurrentUser();
+    const likeColor = pink[500];
+    const [isLiked, setIsLiked] = useState(() => likes.includes(user._id));
+
+    const handleLikeCard = async () => {
+        await handleLike(cardId);
+        setIsLiked((prev) => !prev);
+    }
 
     return (
         <>
@@ -23,9 +31,9 @@ export default function CardActionBar({ handleDel, handleLike, handleEdit, cardI
                     <IconButton aria-label='call'>
                         <PhoneIcon />
                     </IconButton>
-                    <IconButton aria-label='favourite' onClick={handleLike}>
-                        <FavoriteIcon />
-                    </IconButton>
+                    {(user) ? <IconButton aria-label='favourite' onClick={handleLikeCard}>
+                        <FavoriteIcon sx={{ color: isLiked ? likeColor : 'inherit' }} />
+                    </IconButton> : null}
                 </Box>
             </CardActions>
         </>

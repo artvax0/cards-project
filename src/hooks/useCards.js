@@ -1,10 +1,11 @@
 import { useCallback, useState } from "react"
 import { useSnack } from "../providers/SnackbarProvider";
 import axios from 'axios'
-import { getAllMyCards, deleteCard, editCard, newCard } from "../services/cardApiService";
+import { likeCard, getAllMyCards, deleteCard, editCard, newCard, getCards } from "../services/cardApiService";
 import normalizeCard from "../helpers/normalization/normalizeCard";
 import useAxios from "./useAxios";
 import { useNavigate } from "react-router-dom";
+import { useCurrentUser } from "../providers/UserProvider";
 
 export default function useCards() {
     const [allCards, setAllCards] = useState([]);
@@ -13,13 +14,16 @@ export default function useCards() {
     const setSnack = useSnack();
     const [card, setCard] = useState([]);
     const navigate = useNavigate();
+    const {user} = useCurrentUser();
     useAxios();
 
     const getAllCards = useCallback(async () => {
         try {
-            const response = await axios.get('https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards');
-            setAllCards(response.data);
-            setSnack("success", "All cards are here!");
+            const response = await getCards();
+            if (response.status >= 200 && response.status < 300) {
+                setAllCards(response.data);
+                setSnack("success", "All cards are here!");
+            }
         } catch (error) {
             setError(error.message);
         }
@@ -107,9 +111,34 @@ export default function useCards() {
         }
     },[]);
 
-    const handleLike = (id) => {
-        console.log(`Liking ${id}`);
-    }
+    const handleLike = useCallback(async (cardId) => {
+        try {
+            const response = await likeCard(cardId);
 
-    return {allCards, card, error, isLoading, getAllCards, getCardById, getMyCards, handleNewCard, handleEditCard, handleDelete, handleLike };
+            if (response.status >= 200 && response.status < 300) {
+                setSnack('success', 'Card like status updated!');
+            }
+        } catch (error) {
+            setError(error.message);
+            setSnack('error', error.message);
+        }
+    },[]);
+
+    const getFavCards = useCallback(async () => {
+        setIsLoading(true);
+        try {
+            const response = await getCards();
+            if (response.status >= 200 && response.status < 300) {
+                if (user) setAllCards(response.data.filter((card) => card.likes.includes(user._id)));
+                setSnack('success', 'Cards loaded!');
+            }
+        } catch (error) {
+            console.log(error)
+            setError(error.message);
+            setSnack('error', error.message);
+        }
+        setIsLoading(false);
+    },[])
+
+    return {allCards, card, error, isLoading, getAllCards, getCardById, getMyCards, handleNewCard, handleEditCard, handleDelete, handleLike, getFavCards };
 }

@@ -15,7 +15,7 @@ export default function CardComponent({ card, handleDel, handleLike, handleEdit 
                     <CardHeaderComponent img={card.image.url} alt={card.image.alt} title={card.title} subtitle={card.subtitle} />
                     <CardBody phone={card.phone} street={card.address.street} houseNumber={card.address.houseNumber} city={card.address.city} bizNumber={card.bizNumber} email={card.email} web={card.web} />
                 </CardActionArea>
-                <CardActionBar handleDel={handleDel} handleEdit={handleEdit} handleLike={handleLike} cardId={card._id} userId={card.user_id} />
+                <CardActionBar handleDel={handleDel} handleEdit={handleEdit} handleLike={handleLike} likes={card.likes} cardId={card._id} userId={card.user_id} />
             </Card>
         </>
     )
