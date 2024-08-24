@@ -32,6 +32,7 @@ export default function useUsers () {
   const handleLogout = useCallback(() => {
     removeToken();
     setUser(null);
+    location.reload();
   }, []);
 
   const handleRegister = useCallback(async (signupInfo) => {

@@ -7,7 +7,9 @@ import { pink } from '@mui/material/colors';
 export default function CardActionBar({ handleDel, handleLike, handleEdit, likes, cardId, userId }) {
     const { user } = useCurrentUser();
     const likeColor = pink[500];
-    const [isLiked, setIsLiked] = useState(() => likes.includes(user._id));
+    const [isLiked, setIsLiked] = useState(() => {
+        if (user) likes.includes(user._id)
+    });
 
     const handleLikeCard = async () => {
         await handleLike(cardId);
