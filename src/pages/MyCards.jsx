@@ -5,10 +5,13 @@ import { Navigate } from 'react-router-dom';
 import { ROUTES } from '../routes/routesModel';
 import CardsFeedback from '../components/cards/CardsFeedback';
 import useCards from '../hooks/useCards';
+import { useTheme } from '../providers/CustomThemeProvider';
 
 export default function MyCards() {
   const { user } = useCurrentUser();
   const { allCards, error, isLoading, getMyCards, handleDelete, handleLike } = useCards();
+  const { isDark } = useTheme();
+
   useEffect(() => {
     getMyCards();
   }, []);
@@ -19,6 +22,7 @@ export default function MyCards() {
       <PageHeader
         title='My Cards'
         subtitle='Here are all the cards you have created'
+        sx={{ mx: '25px', color: isDark ? '#EEEEEE' : '#222831' }}
       />
       <CardsFeedback
         cards={allCards}

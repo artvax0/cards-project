@@ -1,17 +1,19 @@
 import React from 'react'
 import { Box } from "@mui/material";
 import PageHeader from '../components/PageHeader';
+import { useTheme } from '../providers/CustomThemeProvider';
 
 export default function AboutPage() {
+  const { isDark } = useTheme();
   return (
     <>
       <PageHeader
         title='About'
         subtitle='On this page you can find explanations about using the application'
-        sx={{ mx: '25px' }}
+        sx={{ mx: '25px', color: isDark ? '#EEEEEE' : '#222831' }}
       />
       <Box display='flex' justifyContent='space-between' mt={2} mx='25px'>
-        <Box flexGrow={1}>
+        <Box flexGrow={1} sx={{ color: isDark ? '#EEEEEE' : '#222831' }}>
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laborum debitis voluptate quam ab, ratione itaque omnis cum vel aliquid assumenda. Fugit distinctio perferendis laboriosam error harum iure deleniti atque illum omnis illo nesciunt animi delectus, porro excepturi? Expedita harum eligendi sint, dolorem consequatur architecto explicabo, ex, voluptatem ab quia nobis.
         </Box>
         <Box>
