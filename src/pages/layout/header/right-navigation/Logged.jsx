@@ -1,19 +1,45 @@
 import { Avatar, IconButton, Menu, MenuItem, Tooltip } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import LogoutIcon from '@mui/icons-material/Logout';
 import useUsers from '../../../../hooks/useUsers';
+import { useCurrentUser } from '../../../../providers/UserProvider';
+import { getUserData } from '../../../../services/userApiService';
 
 export default function Logged() {
     const [anchorEl, setAnchorEl] = useState(null);
+    const [avatarUrl, setAvatarUrl] = useState('public/avatar.png');
+    const [avatarAlt, setAvatarAlt] = useState('avatar');
     const open = Boolean(anchorEl);
+
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
+
     const handleClose = () => {
         setAnchorEl(null);
     };
+
     const { handleLogout } = useUsers();
+
+    const { user } = useCurrentUser();
+
+    useEffect(() => {
+        const userData = async () => {
+            try {
+                const data = await getUserData(user._id);
+                setAvatarUrl(data.image.url || 'public/avatar.png');
+                setAvatarAlt(data.image.alt || 'avatar');
+            } catch (error) {
+                // if all else failed, default the info.
+                console.error('Failed to get user avatar');
+                setAvatarUrl('public/avatar.png');
+                setAvatarAlt('avatar');
+            }
+        }
+        userData();
+    }, [user])
+
     return (
         <>
             <Tooltip title='Account Settings'>
@@ -25,7 +51,7 @@ export default function Logged() {
                     aria-expanded={open ? 'true' : undefined}
                     onClick={handleClick}
                 >
-                    <Avatar src='public/avatar.png' alt='avatar' />
+                    <Avatar src={avatarUrl} alt={avatarAlt} />
                 </IconButton>
             </Tooltip>
             <Menu
