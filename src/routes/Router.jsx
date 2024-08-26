@@ -12,6 +12,7 @@ import CardsDetailsPage from "../pages/CardsDetailsPage";
 import AddCardPage from "../pages/AddCardPage";
 import ErrorPage from "../pages/ErrorPage";
 import EditCardPage from "../pages/EditCardPage";
+import ProfilePage from "../pages/ProfilePage";
 
 export default function Router() {
   return (
@@ -27,6 +28,7 @@ export default function Router() {
       <Route path={ROUTES.CARD_INFO + '/:id'} element={<CardsDetailsPage />} />
       <Route path={ROUTES.NEW_CARD} element={<AddCardPage />} />
       <Route path={ROUTES.EDIT_CARD + '/:id'} element={<EditCardPage />} />
+      <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
       <Route path='*' element={<ErrorPage />} />
     </Routes>
   )

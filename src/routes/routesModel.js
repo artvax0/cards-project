@@ -10,4 +10,5 @@ export const ROUTES = {
     CARD_INFO: '/card-info',
     NEW_CARD: '/new-card',
     EDIT_CARD: '/edit-card',
+    PROFILE: '/profile',
 }
