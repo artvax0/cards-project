@@ -5,6 +5,8 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import useUsers from '../../../../hooks/useUsers';
 import { useCurrentUser } from '../../../../providers/UserProvider';
 import { getUserData } from '../../../../services/userApiService';
+import { ROUTES } from '../../../../routes/routesModel';
+import { useNavigate } from 'react-router-dom';
 
 export default function Logged() {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -21,7 +23,7 @@ export default function Logged() {
     };
 
     const { handleLogout } = useUsers();
-
+    const navigate = useNavigate();
     const { user } = useCurrentUser();
 
     useEffect(() => {
@@ -90,7 +92,7 @@ export default function Logged() {
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
-                <MenuItem onClick={handleClose}><AccountBoxIcon /> &nbsp; Profile</MenuItem>
+                <MenuItem onClick={() => navigate(ROUTES.PROFILE)}><AccountBoxIcon /> &nbsp; Profile</MenuItem>
                 <MenuItem onClick={handleLogout}><LogoutIcon /> &nbsp; Logout</MenuItem>
             </Menu>
         </>

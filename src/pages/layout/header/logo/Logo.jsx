@@ -8,7 +8,7 @@ export default function Logo() {
   const { isDark } = useTheme();
   return (
     <NavBarLink to={ROUTES.ROOT} sx={{ display: { xs: 'none', md: 'inline-flex' } }}>
-      <Typography fontFamily='fantasy' variant='h4' sx={{ color: isDark ? '#EEEEEE' : '#222831' }}>BCard</Typography>
+      <Typography fontFamily='fantasy' variant='h4' sx={{ color: isDark ? '#EEEEEE' : '#222831' }}>Business Galore</Typography>
     </NavBarLink>
   )
 }

@@ -1,20 +1,21 @@
 import axios from 'axios'
+import useAxios from '../hooks/useAxios';
 const apiUrl = 'https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users';
 
 export const login = async (userLogin) => {
     try {
-        const {data} = await axios.post(apiUrl + '/login', userLogin);
+        const { data } = await axios.post(apiUrl + '/login', userLogin);
         return data;
     } catch (error) {
         throw new Error(error.message);
     }
-    }
+}
 
 export const signup = async (signupInfo) => {
     try {
-        const {data} = await axios.post(apiUrl, signupInfo);
+        const { data } = await axios.post(apiUrl, signupInfo);
         return data;
-    }catch (error) {
+    } catch (error) {
         console.error("Error making request:", error.message); // Log error message
         if (error.response) {
             // The request was made and the server responded with a status code
@@ -34,10 +35,13 @@ export const signup = async (signupInfo) => {
 }
 
 export const getUserData = async (userId) => {
+    console.log('Beginning API call getUserData');
+
     try {
-        const {data} = await axios.get(`${apiUrl}/${userId}`);
+        const { data } = await axios.get(`${apiUrl}/${userId}`);
+        console.log('fetched: ' + data);
         return data;
     } catch (error) {
-        throw new Error(error.message);
+        throw new Error(error.response.data);
     }
 }
