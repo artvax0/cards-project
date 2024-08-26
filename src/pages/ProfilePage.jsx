@@ -1,29 +1,29 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import UserProfile from '../components/UserProfile'
-import { useCurrentUser } from '../providers/UserProvider'
-import { getUserData } from '../services/userApiService';
 import { Navigate } from 'react-router-dom';
 import { ROUTES } from '../routes/routesModel';
+import useUsers from '../hooks/useUsers';
+import { useCurrentUser } from '../providers/UserProvider';
+import Spinner from '../components/Spinner';
+import Error from '../components/Error';
 
 export default function ProfilePage() {
+  const { userData, handleGetUser, error, isLoading } = useUsers();
   const { user } = useCurrentUser();
-  const [userData, setUserData] = useState({});
+
   useEffect(() => {
-    async function getUserInfo() {
-      console.log(user._id);
-      const data = await getUserData(user._id);
-      setUserData(data);
-      console.log(data);
-      console.log(userData);
+    if (user && user._id) {
+      const getUser = async () => {
+        await handleGetUser(user._id);
+      }
+      getUser();
     }
-    user && getUserInfo();
   }, [user]);
 
   if (!user) return <Navigate to={ROUTES.LOGIN} replace />
-  return (
-    <div>ProfilePage
-      {console.log(userData)}
-      <UserProfile title='User Profile' styles={{ maxWidth: '800px' }} data={userData} />
-    </div>
-  )
+  if (isLoading) return <Spinner />
+  if (error) return <Error />
+  if (userData && Object.keys(userData).length > 0) return <UserProfile title='User Profile' styles={{ maxWidth: '800px' }} userData={userData} isLoading={isLoading} error={error} />
+
+  return null;
 }

@@ -35,12 +35,8 @@ export const signup = async (signupInfo) => {
 }
 
 export const getUserData = async (userId) => {
-    console.log('Beginning API call getUserData');
-
     try {
-        const { data } = await axios.get(`${apiUrl}/${userId}`);
-        console.log('fetched: ' + data);
-        return data;
+        return await axios.get(`${apiUrl}/${userId}`);
     } catch (error) {
         throw new Error(error.response.data);
     }

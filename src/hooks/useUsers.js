@@ -1,18 +1,21 @@
 import { useCallback, useState } from "react";
 import { useCurrentUser } from "../providers/UserProvider";
-import { login, signup } from "../services/userApiService";
+import { getUserData, login, signup } from "../services/userApiService";
 import { getUser, removeToken, setTokenInLocalStorage } from "../services/localStorageService";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../routes/routesModel";
 import normalizeUser from "../helpers/normalization/normalizeUser";
 import { useSnack } from "../providers/SnackbarProvider";
+import useAxios from "./useAxios";
 
-export default function useUsers () {
-  const [isLoading, setIsLoading] = useState();
+export default function useUsers() {
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
-  const {setUser, setToken} = useCurrentUser();
+  const [userData, setUserData] = useState({});
+  const { setUser, setToken } = useCurrentUser();
   const navigate = useNavigate();
   const setSnack = useSnack();
+  useAxios();
 
   const handleLogin = useCallback(async (userLogin) => {
     setIsLoading(true);
@@ -40,7 +43,7 @@ export default function useUsers () {
     try {
       const normalizedSignupInfo = normalizeUser(signupInfo);
       await signup(normalizedSignupInfo);
-      await handleLogin({email: signupInfo.email, password: signupInfo.password});
+      await handleLogin({ email: signupInfo.email, password: signupInfo.password });
     } catch (error) {
       setError(error.message);
       setSnack("error", error.message);
@@ -48,5 +51,21 @@ export default function useUsers () {
     setIsLoading(false);
   }, []);
 
-  return { isLoading, error, handleLogin, handleLogout, handleRegister };
+  const handleGetUser = useCallback(async (userId) => {
+    try {
+      const response = await getUserData(userId);
+      if (response.status >= 200 && response.status < 300) {
+        setSnack('success', 'User profile loaded!');
+        if (response.data) {
+          setUserData(response.data);
+        }
+      }
+    } catch (error) {
+      setError(error.message);
+      setSnack('error', error.message);
+    }
+    setIsLoading(false);
+  }, [])
+
+  return { isLoading, error, handleLogin, handleLogout, handleRegister, handleGetUser, userData };
 }
