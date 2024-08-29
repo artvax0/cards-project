@@ -58,6 +58,7 @@ export default function useUsers() {
         setSnack('success', 'User profile loaded!');
         if (response.data) {
           setUserData(response.data);
+          return (response.data);
         }
       }
     } catch (error) {

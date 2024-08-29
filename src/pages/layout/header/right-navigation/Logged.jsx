@@ -4,7 +4,6 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import LogoutIcon from '@mui/icons-material/Logout';
 import useUsers from '../../../../hooks/useUsers';
 import { useCurrentUser } from '../../../../providers/UserProvider';
-import { getUserData } from '../../../../services/userApiService';
 import { ROUTES } from '../../../../routes/routesModel';
 import { useNavigate } from 'react-router-dom';
 
@@ -22,24 +21,24 @@ export default function Logged() {
         setAnchorEl(null);
     };
 
-    const { handleLogout } = useUsers();
+    const { handleLogout, handleGetUser } = useUsers();
     const navigate = useNavigate();
     const { user } = useCurrentUser();
 
     useEffect(() => {
-        const userData = async () => {
+        const userInfo = async () => {
             try {
-                const data = await getUserData(user._id);
+                const data = await handleGetUser(user._id);
                 setAvatarUrl(data.image.url || 'public/avatar.png');
                 setAvatarAlt(data.image.alt || 'avatar');
             } catch (error) {
                 // if all else failed, default the info.
-                console.error('Failed to get user avatar');
+                console.error('Failed to load user avatar');
                 setAvatarUrl('public/avatar.png');
                 setAvatarAlt('avatar');
             }
         }
-        userData();
+        userInfo();
     }, [user])
 
     return (
