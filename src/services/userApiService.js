@@ -7,7 +7,7 @@ export const login = async (userLogin) => {
         const { data } = await axios.post(apiUrl + '/login', userLogin);
         return data;
     } catch (error) {
-        throw new Error(error.message);
+        throw new Error(error.response.data);
     }
 }
 
@@ -30,7 +30,7 @@ export const signup = async (signupInfo) => {
             // Something happened in setting up the request that triggered an Error
             console.error("Error setting up the request:", error.message);
         }
-        throw new Error(error.message);
+        throw new Error(error.response.data);
     }
 }
 
