@@ -28,6 +28,7 @@ const Input = ({
                 onChange={onChange}
                 fullWidth
                 autoComplete="off"
+                size='small'
             />
         </Grid>
     );

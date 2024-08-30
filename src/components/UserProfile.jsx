@@ -1,13 +1,25 @@
-import { Avatar, Box, Container, FormControl, Grid, InputLabel, TextField, Typography } from "@mui/material";
-import React from "react";
+import { Avatar, Box, Button, Container, Divider, FormControl, Grid, InputLabel, TextField, Typography } from "@mui/material";
+import React, { useState } from "react";
 import { useTheme } from "../providers/CustomThemeProvider";
+import EditProfile from "./EditProfile";
+import initialProfileForm from "../helpers/initialForms/initialProfileForm";
+import profileSchema from "../models/profileSchema";
+import useForm from "../hooks/useForm";
 
 export default function UserProfile({ title, styles = {}, userData }) {
   const { isDark } = useTheme();
+  const [openSettings, setOpenSettings] = useState(false);
+  const handleOpenSettings = () => {
+    setOpenSettings((prev) => !prev);
+  }
+  const handleUpdateProfile = () => {
+    console.log('handle!')
+  }
+  const { data, errors, handleChange, validateForm, onSubmit } = useForm(initialProfileForm, profileSchema, handleUpdateProfile);
   return (
     <Container
       color="inherit"
-      sx={{ mt: 2, p: { xs: 1, sm: 2 }, ...styles }}
+      sx={{ p: { xs: 1, sm: 2 }, ...styles }}
     >
       <Typography
         align='center'
@@ -18,8 +30,29 @@ export default function UserProfile({ title, styles = {}, userData }) {
       >
         {title.toUpperCase()}
       </Typography>
-      <Grid container spacing={1} my={2} direction='row' width='100'>
-        <Grid item xs={12} md={8} container spacing={2}>
+      <Divider variant="middle" />
+      <Grid container spacing={3} my={2} direction='row' width='100'>
+        <Grid item container xs={12} md={4}>
+          <Box width='100%' >
+            <Avatar alt={userData.image.alt} src={userData.image.url} sx={{ width: '50%', height: 'fit-content', mx: 'auto' }} />
+            <Divider sx={{ mt: 2 }} />
+            {
+              !openSettings ?
+                <Button variant='outlined' fullWidth sx={{ mt: 2 }} onClick={handleOpenSettings}>Edit Profile</Button> :
+                <EditProfile
+                  setOpenSettings={setOpenSettings}
+                  onSubmit={onSubmit}
+                  validateForm={validateForm}
+                  errors={errors}
+                  data={data}
+                  handleChange={handleChange}
+                />
+            }
+
+
+          </Box>
+        </Grid>
+        <Grid item xs={12} md={8} container spacing={2} height='fit-content'>
           <Grid item xs={12} sm={6} md={4}>
             <TextField label='First Name' InputProps={{ readOnly: true }} fullWidth defaultValue={userData.name.first} />
           </Grid>
@@ -53,11 +86,6 @@ export default function UserProfile({ title, styles = {}, userData }) {
           <Grid item xs={12} sm={6} md={4}>
             <TextField label='Zip' InputProps={{ readOnly: true }} fullWidth defaultValue={userData.address.zip} />
           </Grid>
-        </Grid>
-        <Grid item container xs={12} md={4}>
-          <Box width='100%'>
-            <Avatar alt={userData.image.alt} src={userData.image.url} sx={{ width: '100%', height: '100%' }} />
-          </Box>
         </Grid>
       </Grid>
     </Container >
