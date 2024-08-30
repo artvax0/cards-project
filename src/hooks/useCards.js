@@ -14,7 +14,7 @@ export default function useCards() {
     const setSnack = useSnack();
     const [card, setCard] = useState([]);
     const navigate = useNavigate();
-    const {user} = useCurrentUser();
+    const { user } = useCurrentUser();
     useAxios();
 
     const getAllCards = useCallback(async () => {
@@ -30,13 +30,13 @@ export default function useCards() {
         setIsLoading(false);
     }, []);
 
-    const getCardById = useCallback(async (id, snackStatus='success', snackMsg='Card Loaded!') => {
+    const getCardById = useCallback(async (id, snackStatus = 'success', snackMsg = 'Card Loaded!') => {
         try {
-            const {data} = await axios.get(`https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards/${id}`);
+            const { data } = await axios.get(`https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards/${id}`);
             setCard(data);
             setSnack(snackStatus, snackMsg);
             setIsLoading(false);
-            return(data);
+            return (data);
         } catch (error) {
             setError(error.message);
         }
@@ -62,7 +62,7 @@ export default function useCards() {
         try {
             const normalizedCardInfo = normalizeCard(newCardInfo);
             const response = await newCard(normalizedCardInfo);
-            
+
             if (response.status >= 200 && response.status < 300) {
                 setSnack('success', 'Added Card!');
                 setTimeout(() => {
@@ -74,7 +74,7 @@ export default function useCards() {
             setSnack('error', error.message);
         }
         setIsLoading(false);
-    },[]);
+    }, []);
 
     const handleEditCard = useCallback(async (cardId, updatedCardInfo) => {
         setIsLoading(true);
@@ -93,7 +93,7 @@ export default function useCards() {
             setSnack('error', error.message);
         }
         setIsLoading(false)
-    },[]);
+    }, []);
 
     const handleDelete = useCallback(async (cardId, bizNumber) => {
         try {
@@ -109,7 +109,7 @@ export default function useCards() {
             setError(error.message);
             setSnack('error', error.message);
         }
-    },[]);
+    }, []);
 
     const handleLike = useCallback(async (cardId) => {
         try {
@@ -122,7 +122,7 @@ export default function useCards() {
             setError(error.message);
             setSnack('error', error.message);
         }
-    },[]);
+    }, []);
 
     const getFavCards = useCallback(async () => {
         setIsLoading(true);
@@ -138,7 +138,7 @@ export default function useCards() {
             setSnack('error', error.message);
         }
         setIsLoading(false);
-    },[])
+    }, [])
 
-    return {allCards, card, error, isLoading, getAllCards, getCardById, getMyCards, handleNewCard, handleEditCard, handleDelete, handleLike, getFavCards };
+    return { allCards, card, error, isLoading, getAllCards, getCardById, getMyCards, handleNewCard, handleEditCard, handleDelete, handleLike, getFavCards };
 }

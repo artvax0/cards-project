@@ -13,10 +13,9 @@ import CardForm from '../components/forms/CardForm'
 import mapCardToModel from '../helpers/normalization/mapCardToModel'
 
 export default function EditCardPage() {
-  const { card, error, isLoading, getCardById } = useCards();
+  const { card, error, isLoading, getCardById, handleEditCard } = useCards();
   const { user } = useCurrentUser();
   const { id } = useParams();
-  const { handleEditCard } = useCards();
   const { data, errors, setData, handleChange, handleReset, validateForm, onSubmit } = useForm(initialCardForm, cardSchema, () => { handleEditCard(card._id, data) });
 
   useEffect(() => {
