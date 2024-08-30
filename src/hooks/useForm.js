@@ -14,37 +14,37 @@ export default function useForm(initialForm, schema, handleSubmit) {
         let { error } = joiSchema.validate({ [name]: value });
         // if has an error, error details will be returned, if not- null
         return error ? error.details[0].message : null;
-    },[schema]);
+    }, [schema]);
 
     const handleChange = useCallback((e) => {
-    let value = e.target.value;
-    let name = e.target.name;
+        let value = e.target.value;
+        let name = e.target.name;
 
-    // validate properties of textfields dynamically (validateProperty function further below) and define as errorMessage
-    const errorMessage = validateProperty(name, value);
+        // validate properties of textfields dynamically (validateProperty function further below) and define as errorMessage
+        const errorMessage = validateProperty(name, value);
 
-    // if there's an error message, add it to the errors state
-    if (errorMessage) {
-        setErrors((prev) => ({ ...prev, [name]: errorMessage }));
-    } else {
-        // else, delete said error message from the state
-        setErrors((prev) => {
-            let obj = { ...prev };
-            delete obj[name];
-            return obj;
-        });
-    }
+        // if there's an error message, add it to the errors state
+        if (errorMessage) {
+            setErrors((prev) => ({ ...prev, [name]: errorMessage }));
+        } else {
+            // else, delete said error message from the state
+            setErrors((prev) => {
+                let obj = { ...prev };
+                delete obj[name];
+                return obj;
+            });
+        }
         // set the data state to object with said property and its textfield value
         setData((prev) => ({ ...prev, [name]: value }));
-    },[validateProperty]);
+    }, [validateProperty]);
 
-    const handleChangeCheckbox = useCallback((e)=> {
+    const handleChangeCheckbox = useCallback((e) => {
         let value = e.target.checked;
         let name = e.target.name;
 
         // set the data state to object with said property and its textfield value
         setData((prev) => ({ ...prev, [name]: value }));
-    },[]);
+    }, []);
 
     const validateForm = useCallback(() => {
         // gets the entire validation schema
@@ -55,16 +55,20 @@ export default function useForm(initialForm, schema, handleSubmit) {
         if (error) return false;
         // else, submit button is active (gets reversed)
         return true;
-    },[schema, data]);
+    }, [schema, data]);
 
     const handleReset = useCallback(() => {
         setData(initialForm);
         setErrors({});
-    },[initialForm]);
+    }, [initialForm]);
 
-    const onSubmit = useCallback(() => {
-        handleSubmit(data);
-    },[data]);
+    const onSubmit = useCallback((e) => {
+        // toggle form to be disabled
+        e.target.disabled = true;
+        e.target.classList.toggle('Mui-disabled');
+
+        handleSubmit(data, e);
+    }, [data]);
 
     return {
         data,

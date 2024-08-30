@@ -17,18 +17,22 @@ export default function useUsers() {
   const setSnack = useSnack();
   useAxios();
 
-  const handleLogin = useCallback(async (userLogin) => {
+  const handleLogin = useCallback(async (userLogin, e) => {
     setIsLoading(true);
     try {
-      const token = await login(userLogin);
-      setTokenInLocalStorage(token);
-      setToken(token);
-      setUser(getUser());
-      navigate(ROUTES.CARDS);
+      const response = await login(userLogin);
+      if (response.status >= 200 && response.status < 300) {
+        setTokenInLocalStorage(response.data);
+        setToken(response.data);
+        setUser(getUser());
+        navigate(ROUTES.CARDS);
+      }
     } catch (error) {
       setError(error.message);
       setSnack("error", error.message);
     }
+    e.target.disabled = false;
+    e.target.classList.toggle("Mui-disabled");
     setIsLoading(false);
   }, []);
 
@@ -38,16 +42,18 @@ export default function useUsers() {
     location.reload();
   }, []);
 
-  const handleRegister = useCallback(async (signupInfo) => {
+  const handleRegister = useCallback(async (signupInfo, e) => {
     setIsLoading(true);
     try {
       const normalizedSignupInfo = normalizeUser(signupInfo);
       await signup(normalizedSignupInfo);
-      await handleLogin({ email: signupInfo.email, password: signupInfo.password });
+      await handleLogin({ email: signupInfo.email, password: signupInfo.password }, e);
     } catch (error) {
       setError(error.message);
       setSnack("error", error.message);
     }
+    e.target.disabled = false;
+    e.target.classList.toggle("Mui-disabled");
     setIsLoading(false);
   }, []);
 
