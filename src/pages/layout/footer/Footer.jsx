@@ -11,7 +11,7 @@ export default function Footer() {
   const navigate = useNavigate();
   const { user } = useCurrentUser();
   return (
-    <Paper elevation={3} component='footer' sx={{ position: 'sticky', bottom: 0, left: 0, right: 0 }} width='100%'>
+    <Paper elevation={3} component='footer' sx={{ position: 'sticky', bottom: 0, left: 0, right: 0, zIndex: 100 }} width='100%'>
       <Divider />
       <BottomNavigation showLabels>
         <BottomNavigationAction label='About' icon={<InfoIcon />} onClick={() => navigate(ROUTES.ABOUT)} />
