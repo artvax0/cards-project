@@ -11,6 +11,8 @@ import cardSchema from '../models/cardSchema'
 import initialCardForm from '../helpers/initialForms/initialCardForm'
 import CardForm from '../components/forms/CardForm'
 import mapCardToModel from '../helpers/normalization/mapCardToModel'
+import CardComponent from '../components/cards/CardComponent'
+import normalizeCard from '../helpers/normalization/normalizeCard'
 
 export default function EditCardPage() {
   const { card, error, isLoading, getCardById, handleEditCard } = useCards();
@@ -52,6 +54,12 @@ export default function EditCardPage() {
         data={data}
         onInputChange={handleChange}
       />
+      {data && (<CardComponent
+        card={{ ...card, ...normalizeCard(data), _id: id }}
+        handleDelete={() => { }}
+        handleEdit={() => { }}
+        handleLike={() => { }}
+      />)}
     </Container >
   )
 }

@@ -8,6 +8,8 @@ import useForm from '../hooks/useForm';
 import initialCardForm from '../helpers/initialForms/initialCardForm';
 import cardSchema from '../models/cardSchema';
 import useCards from '../hooks/useCards';
+import CardComponent from '../components/cards/CardComponent';
+import normalizeCard from '../helpers/normalization/normalizeCard';
 
 export default function AddCardPage() {
     const { user } = useCurrentUser();
@@ -33,6 +35,12 @@ export default function AddCardPage() {
                 data={data}
                 onInputChange={handleChange}
             />
+            {data && (<CardComponent
+                card={{ ...normalizeCard(data), _id: '', likes: [], }}
+                handleDelete={() => { }}
+                handleEdit={() => { }}
+                handleLike={() => { }}
+            />)}
         </Container>
     )
 }
