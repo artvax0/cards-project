@@ -72,7 +72,7 @@ export default function UserProfile({ title, styles = {}, userData }) {
             <TextField label='Country' InputProps={{ readOnly: true }} fullWidth defaultValue={userData.address.country} />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
-            <TextField label='State' InputProps={{ readOnly: true }} fullWidth defaultValue={userData.address.state} />
+            <TextField label='State' InputProps={{ readOnly: true }} fullWidth defaultValue={userData.address.state == 'not defined' ? '' : userData.address.state} />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
             <TextField label='City' InputProps={{ readOnly: true }} fullWidth defaultValue={userData.address.city} />

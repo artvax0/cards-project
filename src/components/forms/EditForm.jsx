@@ -42,8 +42,8 @@ const EditForm = ({
         <Grid item xs={6}>
           <FormButton
             node="Submit"
+            color='success'
             onClick={onSubmit}
-            variant='outlined'
             disabled={!validateForm()}
           />
         </Grid>
