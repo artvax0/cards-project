@@ -23,7 +23,7 @@ export default function ProfilePage() {
   if (!user) return <Navigate to={ROUTES.LOGIN} replace />
   if (isLoading) return <Spinner />
   if (error) return <Error />
-  if (userData && Object.keys(userData).length > 0) return <UserProfile title='User Profile' styles={{ maxWidth: '800px' }} userData={userData} isLoading={isLoading} error={error} />
+  if (userData && Object.keys(userData).length > 0) return <UserProfile title='User Profile' userId={user._id} styles={{ maxWidth: '800px' }} userData={userData} isLoading={isLoading} error={error} />
 
   return null;
 }

@@ -9,8 +9,8 @@ const initialProfileForm = {
   country: '',
   city: '',
   street: '',
-  houseNumber: 0,
-  zip: 0,
+  houseNumber: '',
+  zip: '',
 }
 
 export default initialProfileForm;

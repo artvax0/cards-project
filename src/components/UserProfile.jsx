@@ -1,21 +1,29 @@
-import { Avatar, Box, Button, Container, Divider, FormControl, Grid, InputLabel, TextField, Typography } from "@mui/material";
+import { Avatar, Box, Button, Container, Divider, Grid, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useTheme } from "../providers/CustomThemeProvider";
 import EditProfile from "./EditProfile";
 import initialProfileForm from "../helpers/initialForms/initialProfileForm";
 import profileSchema from "../models/profileSchema";
 import useForm from "../hooks/useForm";
+import useUsers from "../hooks/useUsers";
+import normalizeProfile from "../helpers/normalization/normalizeProfile";
 
-export default function UserProfile({ title, styles = {}, userData }) {
+export default function UserProfile({ userId, title, styles = {}, userData }) {
   const { isDark } = useTheme();
   const [openSettings, setOpenSettings] = useState(false);
   const handleOpenSettings = () => {
     setOpenSettings((prev) => !prev);
   }
-  const handleUpdateProfile = () => {
-    console.log('handle!')
+
+  const { handleUpdateUser } = useUsers();
+  const updateUser = () => {
+    const normalizedData = normalizeProfile(data);
+    handleUpdateUser(userId, normalizedData);
+    handleOpenSettings();
+    handleReset();
   }
-  const { data, errors, handleChange, validateForm, onSubmit } = useForm(initialProfileForm, profileSchema, handleUpdateProfile);
+
+  const { data, errors, handleChange, validateForm, onSubmit, handleReset } = useForm(initialProfileForm, profileSchema, updateUser);
   return (
     <Container
       color="inherit"

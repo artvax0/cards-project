@@ -24,3 +24,12 @@ export const getUserData = async (userId) => {
         throw new Error(error.response.data);
     }
 }
+
+export const updateUser = async (userId, userProfile) => {
+    try {
+
+        return await axios.put(`${apiUrl}/${userId}`, userProfile);
+    } catch (error) {
+        throw new Error(error.response.data);
+    }
+}

@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { useCurrentUser } from "../providers/UserProvider";
-import { getUserData, login, signup } from "../services/userApiService";
+import { getUserData, login, signup, updateUser } from "../services/userApiService";
 import { getUser, removeToken, setTokenInLocalStorage } from "../services/localStorageService";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../routes/routesModel";
@@ -75,5 +75,23 @@ export default function useUsers() {
     setIsLoading(false);
   }, [])
 
-  return { isLoading, error, handleLogin, handleLogout, handleRegister, handleGetUser, userData };
+  const handleUpdateUser = useCallback(async (userId, userProfile) => {
+    try {
+      const response = await updateUser(userId, userProfile);
+      if (response.status >= 200 && response.status < 300) {
+        setSnack('success', 'User updated!');
+        if (response.data) {
+          setUserData(response.data);
+          setIsLoading(false);
+          return (response.data);
+        }
+      }
+    } catch (error) {
+      setError(error.message);
+      setSnack('error', error.message);
+    }
+    setIsLoading(false);
+  })
+
+  return { isLoading, error, handleLogin, handleLogout, handleRegister, handleGetUser, handleUpdateUser, userData };
 }
