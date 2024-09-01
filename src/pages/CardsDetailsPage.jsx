@@ -42,7 +42,7 @@ export default function CardsDetailsPage() {
             <Typography gutterBottom sx={{ display: 'flex', alignItems: 'center' }} ><EmailIcon /> &nbsp; {card.email}</Typography>
             <Typography gutterBottom sx={{ display: 'flex', alignItems: 'center' }}><PhoneIcon /> &nbsp; {card.phone}</Typography>
 
-            <Typography gutterBottom sx={{ display: 'flex', alignItems: 'center' }}><PlaceIcon /> &nbsp; {card.address.street} {card.address.houseNumber}, {card.address.city}, {card.address.country}</Typography>
+            <Typography gutterBottom sx={{ display: 'flex', alignItems: 'center' }}><PlaceIcon /> &nbsp; {card.address.street} {card.address.houseNumber}, {card.address.city}, {card.address.state ? card.address.state + ', ' : null} {card.address.country} {card.address.zip ? '| ' + card.address.zip : null}</Typography>
             <Typography sx={{ display: 'flex', alignItems: 'center' }}><OpenInNewIcon /> &nbsp; <Link href="#">{card.web}</Link></Typography>
           </Box>
           <Box>

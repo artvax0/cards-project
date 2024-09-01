@@ -1,25 +1,21 @@
 import React from 'react'
 import { Box, CardContent, Link, Typography } from '@mui/material'
+import PhoneIcon from '@mui/icons-material/Phone';
+import EmailIcon from '@mui/icons-material/Email';
+import PlaceIcon from '@mui/icons-material/Place';
 
-export default function CardBody({ phone, street, houseNumber, city, bizNumber, email, web }) {
+export default function CardBody({ phone, street, houseNumber, city, state, country, zip, email, web }) {
     return (
-    <>
+        <>
             <CardContent>
-                <Box component="div" display="flex" className="phoneNumber" sx={{ mt:1 }}>
-                    <Typography variant="body1" paragraph sx={{ fontWeight:'bold' }}>Phone:&nbsp;</Typography>
-                    <Typography variant="body1" paragraph>{phone}</Typography>
-                </Box>
-                <Box component="div" display="flex" className="address">
-                    <Typography variant="body1" paragraph sx={{ fontWeight:'bold' }}>Address:&nbsp;</Typography>
-                    <Typography variant="body1" paragraph>{street} {houseNumber}, {city}</Typography>
-                </Box>
-                <Box component="div" display="flex" className="cardNumber">
-                    <Typography variant="body1" paragraph sx={{ fontWeight:'bold' }}>Card Number:&nbsp;</Typography>
-                    <Typography variant="body1" paragraph>{bizNumber}</Typography>
+                <Box component="div" display="flex" className="phoneNumber" sx={{ mt: 1 }}>
+                    <Typography variant="body1" paragraph sx={{ display: 'flex', alignItems: 'center' }}><PhoneIcon /> &nbsp; {phone}</Typography>
                 </Box>
                 <Box component="div" display="flex" className="email">
-                    <Typography variant="body1" paragraph sx={{ fontWeight:'bold' }}>Email:&nbsp;</Typography>
-                    <Typography variant="body1" paragraph>{email}</Typography>
+                    <Typography variant="body1" paragraph sx={{ display: 'flex', alignItems: 'center' }}><EmailIcon /> &nbsp; {email}</Typography>
+                </Box>
+                <Box component="div" display="flex" className="address">
+                    <Typography variant="body1" paragraph sx={{ display: 'flex', alignItems: 'center' }}><PlaceIcon /> &nbsp; {street} {houseNumber}, {city}, {state ? state + ', ' : null} {country} {zip ? '| ' + zip : null}</Typography>
                 </Box>
                 <Link href='#' underline='hover' variant="body2">{web}</Link>
             </CardContent>

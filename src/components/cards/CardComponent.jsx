@@ -13,7 +13,7 @@ export default function CardComponent({ card, handleDel, handleLike, handleEdit 
             <Card sx={{ alignSelf: 'stretch', width: '375px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                 <CardActionArea onClick={() => navigate(ROUTES.CARD_INFO + "/" + card._id)}>
                     <CardHeaderComponent img={card.image.url} alt={card.image.alt} title={card.title} subtitle={card.subtitle} />
-                    <CardBody phone={card.phone} street={card.address.street} houseNumber={card.address.houseNumber} city={card.address.city} bizNumber={card.bizNumber} email={card.email} web={card.web} />
+                    <CardBody phone={card.phone} street={card.address.street} houseNumber={card.address.houseNumber} city={card.address.city} state={card.address.state} country={card.address.country} zip={card.address.zip} email={card.email} web={card.web} />
                 </CardActionArea>
                 <CardActionBar handleDel={handleDel} handleEdit={handleEdit} handleLike={handleLike} likes={card.likes} cardId={card._id} userId={card.user_id} />
             </Card>
