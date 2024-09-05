@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Logged() {
     const [anchorEl, setAnchorEl] = useState(null);
-    const [avatarUrl, setAvatarUrl] = useState('public/avatar.png');
+    const [avatarUrl, setAvatarUrl] = useState('avatar.png');
     const [avatarAlt, setAvatarAlt] = useState('avatar');
     const open = Boolean(anchorEl);
 
@@ -29,12 +29,12 @@ export default function Logged() {
         const userInfo = async () => {
             try {
                 const data = await handleGetUser(user._id);
-                setAvatarUrl(data.image.url || 'public/avatar.png');
+                setAvatarUrl(data.image.url || 'avatar.png');
                 setAvatarAlt(data.image.alt || 'avatar');
             } catch (error) {
                 // if all else failed, default the info.
                 console.error('Failed to load user avatar');
-                setAvatarUrl('public/avatar.png');
+                setAvatarUrl('avatar.png');
                 setAvatarAlt('avatar');
             }
         }
