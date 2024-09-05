@@ -1,4 +1,4 @@
-import { Container } from '@mui/material'
+import { Container, Grid } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useCurrentUser } from '../providers/UserProvider'
 import { Navigate, useParams } from 'react-router-dom'
@@ -43,6 +43,7 @@ export default function EditCardPage() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        flexDirection: { xs: 'column', md: 'row' }
       }}
     >
       <CardForm
@@ -54,12 +55,16 @@ export default function EditCardPage() {
         data={data}
         onInputChange={handleChange}
       />
-      {data && (<CardComponent
-        card={{ ...card, ...normalizeCard(data), _id: id }}
-        handleDelete={() => { }}
-        handleEdit={() => { }}
-        handleLike={() => { }}
-      />)}
+      {data && (
+        <Grid xs={12} width='50%' pb={3}>
+          <CardComponent
+            card={{ ...card, ...normalizeCard(data), _id: id }}
+            handleDelete={() => { }}
+            handleEdit={() => { }}
+            handleLike={() => { }}
+          />
+        </Grid>
+      )}
     </Container >
   )
 }
