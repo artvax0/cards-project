@@ -11,9 +11,11 @@ const Transition = forwardRef(function Transition(props, ref) {
 export default function CardActionBar({ handleDel, handleLike, handleEdit, likes, cardId, userId }) {
     const { user } = useCurrentUser();
     const likeColor = pink[500];
-    const [isLiked, setIsLiked] = useState(() => {
-        if (user) likes.includes(user._id)
-    });
+    const [isLiked, setIsLiked] = useState(false);
+
+    useEffect(() => {
+        if (user && likes.includes(user._id)) setIsLiked(prev => !prev);
+    }, [likes]);
 
     const handleLikeCard = useCallback(async () => {
         await handleLike(cardId);
@@ -42,10 +44,10 @@ export default function CardActionBar({ handleDel, handleLike, handleEdit, likes
                         canEditOrDelete &&
                         <>
                             <IconButton aria-label='delete' onClick={handleClickOpen}>
-                        <DeleteIcon />
+                                <DeleteIcon />
                             </IconButton>
                             <IconButton aria-label='edit' onClick={handleEdit}>
-                        <EditIcon />
+                                <EditIcon />
                             </IconButton>
                         </>
                     }
@@ -57,7 +59,7 @@ export default function CardActionBar({ handleDel, handleLike, handleEdit, likes
                     {
                         (user) ?
                             <IconButton aria-label='favourite' onClick={handleLikeCard}>
-                        <FavoriteIcon sx={{ color: isLiked ? likeColor : 'inherit' }} />
+                                <FavoriteIcon sx={{ color: isLiked ? likeColor : 'inherit' }} />
                             </IconButton> : null
                     }
                 </Box>
