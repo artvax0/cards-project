@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { useCallback } from 'react'
 import CardComponent from './CardComponent';
 import { Box, Grid } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
@@ -6,9 +6,7 @@ import { ROUTES } from '../../routes/routesModel';
 
 export default function Cards({ cards, handleDelete, handleLike }) {
   const navigate = useNavigate();
-  const handleEdit = (id) => {
-    navigate(ROUTES.EDIT_CARD + "/" + id);
-  }
+  const handleEdit = useCallback((id) => navigate(ROUTES.EDIT_CARD + "/" + id), []);
 
   return (
     <Grid container spacing={4} display="flex" flexWrap="wrap" px={10} pb={3}>

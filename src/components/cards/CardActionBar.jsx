@@ -1,6 +1,6 @@
 import { Box, Button, CardActions, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, Slide } from '@mui/material'
 import { Delete as DeleteIcon, Edit as EditIcon, Phone as PhoneIcon, Favorite as FavoriteIcon } from '@mui/icons-material';
-import React, { forwardRef, useState } from 'react'
+import React, { forwardRef, useCallback, useEffect, useMemo, useState } from 'react'
 import { useCurrentUser } from '../../providers/UserProvider';
 import { pink } from '@mui/material/colors';
 
@@ -15,46 +15,51 @@ export default function CardActionBar({ handleDel, handleLike, handleEdit, likes
         if (user) likes.includes(user._id)
     });
 
-    const handleLikeCard = async () => {
+    const handleLikeCard = useCallback(async () => {
         await handleLike(cardId);
         setIsLiked((prev) => !prev);
-    };
+    }, []);
 
     const [open, setOpen] = useState(false);
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+    const handleClickOpen = useCallback(() => setOpen(true), []);
 
-    const handleClose = () => {
-        setOpen(false);
-    };
+    const handleClose = useCallback(() => setOpen(false), []);
 
-    const handleDeleteCard = () => {
+    const handleDeleteCard = useCallback(() => {
         handleClose();
         handleDel();
-    };
+    }, []);
+
+    const canEditOrDelete = useMemo(() => user?.isAdmin || user?._id == userId, [user, userId])
 
     return (
         <>
             <CardActions sx={{ justifyContent: 'space-between' }}>
                 <Box>
-                    {/* Detect if user is admin or owner if card - display delete icon */}
-                    {(user && user.isAdmin) || (user && user._id == userId) ? (<IconButton aria-label='delete' onClick={handleClickOpen}>
+                    {
+                        /* Detect if user is admin or owner of card - display icon buttons */
+                        canEditOrDelete &&
+                        <>
+                            <IconButton aria-label='delete' onClick={handleClickOpen}>
                         <DeleteIcon />
-                    </IconButton>) : null}
-                    {/* Detect if user is admin or owner if card - display edit icon */}
-                    {(user && user.isAdmin) || (user && user._id == userId) ? (<IconButton aria-label='edit' onClick={handleEdit}>
+                            </IconButton>
+                            <IconButton aria-label='edit' onClick={handleEdit}>
                         <EditIcon />
-                    </IconButton>) : null}
+                            </IconButton>
+                        </>
+                    }
                 </Box>
                 <Box>
                     <IconButton aria-label='call'>
                         <PhoneIcon />
                     </IconButton>
-                    {(user) ? <IconButton aria-label='favourite' onClick={handleLikeCard}>
+                    {
+                        (user) ?
+                            <IconButton aria-label='favourite' onClick={handleLikeCard}>
                         <FavoriteIcon sx={{ color: isLiked ? likeColor : 'inherit' }} />
-                    </IconButton> : null}
+                            </IconButton> : null
+                    }
                 </Box>
             </CardActions>
             <Dialog
