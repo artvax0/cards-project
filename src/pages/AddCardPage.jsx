@@ -1,6 +1,6 @@
 import React from 'react'
 import { Navigate } from 'react-router-dom';
-import { Container } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 import CardForm from '../components/forms/CardForm';
 import { ROUTES } from '../routes/routesModel';
 import { useCurrentUser } from '../providers/UserProvider';
@@ -24,6 +24,7 @@ export default function AddCardPage() {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
+                flexDirection: { xs: 'column', md: 'row' }
             }}
         >
             <CardForm
@@ -35,12 +36,16 @@ export default function AddCardPage() {
                 data={data}
                 onInputChange={handleChange}
             />
-            {data && (<CardComponent
-                card={{ ...normalizeCard(data), _id: '', likes: [], }}
-                handleDelete={() => { }}
-                handleEdit={() => { }}
-                handleLike={() => { }}
-            />)}
+            {data && (
+                <Grid xs={12} width='50%' pb={3}>
+                    <CardComponent
+                        card={{ ...normalizeCard(data), _id: '', likes: [], }}
+                        handleDelete={() => { }}
+                        handleEdit={() => { }}
+                        handleLike={() => { }}
+                    />
+                </Grid>
+            )}
         </Container>
     )
 }
