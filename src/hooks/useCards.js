@@ -6,7 +6,6 @@ import normalizeCard from "../helpers/normalization/normalizeCard";
 import useAxios from "./useAxios";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useCurrentUser } from "../providers/UserProvider";
-import useDebounce from "./useDebounce";
 
 export default function useCards() {
     const [allCards, setAllCards] = useState([]);
@@ -16,24 +15,9 @@ export default function useCards() {
     const [card, setCard] = useState([]);
     const navigate = useNavigate();
     const { user } = useCurrentUser();
-    const [filteredCards, setFilteredCards] = useState(null);
-    const [searchQuery, setSearchQuery] = useState('');
     const [searchParams] = useSearchParams();
+    const filteredCards = useMemo(() => allCards.filter((card) => card.title.includes(searchParams.get('q') || '')), [allCards, searchParams]);
     useAxios();
-
-    const debouncedSearchQuery = useDebounce(searchParams.get('q') ?? '', 300);
-
-    useEffect(() => {
-        setSearchQuery(debouncedSearchQuery);
-    }, [debouncedSearchQuery]);
-
-    // useEffect(() => {
-    //     setSearchQuery(searchParams.get('q') ?? '');
-    // }, [searchParams]);
-
-    useEffect(() => {
-        allCards && setFilteredCards(allCards.filter((card) => card.title.includes(searchQuery)));
-    }, [allCards, searchQuery]);
 
     const getAllCards = useCallback(async () => {
         setIsLoading(true);

@@ -3,11 +3,12 @@ import React, { memo, useCallback } from 'react'
 import { useTheme } from '../../../../providers/CustomThemeProvider'
 import { useSearchParams } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
+import { debounce } from '../../../../utils/debounce';
 
 export default memo(function SearchBar() {
   const { isDark } = useTheme();
   const [searchParams, setSearch] = useSearchParams();
-  const handleChange = useCallback(({ target }) => setSearch({ q: target.value }), [setSearch]);
+  const handleChange = useCallback(debounce(({ target }) => setSearch({ q: target.value }), 250), [setSearch]);
 
   return (
     <Box>
@@ -15,7 +16,7 @@ export default memo(function SearchBar() {
         <OutlinedInput
           size='small'
           placeholder='Search'
-          value={searchParams.get('q') ?? ''}
+          defaultValue={searchParams.get('q') ?? ''}
           onChange={handleChange}
           startAdornment={
             <InputAdornment
