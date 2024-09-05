@@ -4,14 +4,13 @@ import CardsFeedback from '../components/cards/CardsFeedback';
 import useCards from '../hooks/useCards';
 import { useTheme } from '../providers/CustomThemeProvider';
 import AddNewCardButton from '../components/cards/AddNewCardButton';
-import { useCurrentUser } from '../providers/UserProvider';
 
 export default function CardsPage() {
-  const { allCards, error, isLoading, getAllCards, handleDelete, handleLike } = useCards();
+  const { filteredCards, error, isLoading, getAllCards, handleDelete, handleLike } = useCards();
   const { isDark } = useTheme();
   useEffect(() => {
     getAllCards();
-  }, []);
+  }, [getAllCards]);
 
   return (
     <>
@@ -21,7 +20,7 @@ export default function CardsPage() {
         sx={{ mx: '25px', color: isDark ? '#EEEEEE' : '#222831' }}
       />
       <CardsFeedback
-        cards={allCards}
+        cards={filteredCards}
         handleDelete={handleDelete}
         handleLike={handleLike}
         error={error}

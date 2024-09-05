@@ -1,12 +1,12 @@
 import { Card, CardActionArea } from '@mui/material';
-import React from 'react'
+import React, { memo } from 'react'
 import CardHeaderComponent from './CardHeaderComponent';
 import CardBody from './CardBody';
 import CardActionBar from './CardActionBar';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../routes/routesModel';
 
-export default function CardComponent({ card, handleDel, handleLike, handleEdit }) {
+export default memo(function CardComponent({ card, handleDel, handleLike, handleEdit }) {
     const navigate = useNavigate();
     return (
         <>
@@ -19,4 +19,4 @@ export default function CardComponent({ card, handleDel, handleLike, handleEdit 
             </Card >
         </>
     )
-}
+})
