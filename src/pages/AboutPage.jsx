@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Container, Divider, Grid, List, ListItem, ListItemText, Typography } from "@mui/material";
+import { Container, Divider, Grid } from "@mui/material";
 import { useTheme } from '../providers/CustomThemeProvider';
 import AboutHeader from '../components/about/AboutHeader';
 import AboutIntro from '../components/about/AboutIntro';
