@@ -1,8 +1,6 @@
 import React from 'react'
-import { Box, Divider, List, ListItem, ListItemText, Typography } from "@mui/material";
+import { Box, Container, Divider, Grid, List, ListItem, ListItemText, Typography } from "@mui/material";
 import { useTheme } from '../providers/CustomThemeProvider';
-import { Link } from 'react-router-dom';
-import { ROUTES } from '../routes/routesModel';
 import AboutHeader from '../components/about/AboutHeader';
 import AboutIntro from '../components/about/AboutIntro';
 import AboutChooseUs from '../components/about/AboutChooseUs';
@@ -12,14 +10,26 @@ import AboutMission from '../components/about/AboutMission';
 export default function AboutPage() {
   const { isDark } = useTheme();
   return (
-    <Box display='flex' justifyContent='space-between'>
-      <Box flexGrow={1} sx={{ color: isDark ? '#EEEEEE' : '#222831' }}>
+    <Container maxWidth='md' sx={{ color: isDark ? '#EEEEEE' : '#222831' }}>
+      <Grid container spacing={4} alignItems='stretch'>
         <AboutHeader />
+        <Grid item xs={12}>
+          <Divider variant='middle' />
+        </Grid>
         <AboutIntro />
+        <Grid item xs={12}>
+          <Divider variant='middle' />
+        </Grid>
         <AboutChooseUs />
+        <Grid item xs={12}>
+          <Divider variant='middle' />
+        </Grid>
         <AboutHowItWorks />
+        <Grid item xs={12}>
+          <Divider variant='middle' />
+        </Grid>
         <AboutMission />
-      </Box>
-    </Box>
+      </Grid>
+    </Container>
   )
 }
