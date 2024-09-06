@@ -1,8 +1,37 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Cards Project - Business Galore
 
-Currently, two official plugins are available:
+This is a one-page based web app that allows users to advertise their businesses with cards.  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+
+
+## Installation
+
+Install my-project with npm
+
+```bash
+  npm i
+```
+
+After all the libraries have been installed, to start the server run  
+```bash
+  npm run dev
+```
+    
+## Features
+
+- Light/dark mode toggle
+- Live previews
+- Cross platform
+- CRUD of cards
+
+
+## 🛠 Skills
+This project uses React, Vite, JS and CSS.
+
+
+## Screenshots
+
+![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+
