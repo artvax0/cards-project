@@ -28,7 +28,7 @@ export default function CardsDetailsPage() {
   if (error) return <Error errorMessage={error} />;
   console.log(card);
   return (
-    <Box flexGrow='1' display='flex' alignItems='center' py={3}>
+    <Box flexGrow='1' display='flex' alignItems='center' justifyContent='center' py={3}>
       <Paper sx={{ backgroundColor: isDark ? '#171717' : '#FFF', display: 'flex', gap: 3, mx: 7, borderRadius: 5, maxHeight: { xs: 'auto', md: '600px' }, flexDirection: { xs: 'column', md: 'row' } }}>
         <Box component='img' src={card.image.url} alt={card.image.alt} sx={{ width: { xs: '100%', md: '50%' }, borderRadius: 5 }} />
         <Box flexGrow={1} sx={{ display: 'flex', flexDirection: 'column' }} p={2}>
