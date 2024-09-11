@@ -14,7 +14,7 @@ export const newCard = async (normalizedCardInfo) => {
     const response = await axios.post(apiUrl, normalizedCardInfo);
     return response;
   } catch (error) {
-    throw new Error (error.response.data);
+    throw new Error(error.response.data);
   }
 }
 
@@ -23,15 +23,15 @@ export const editCard = async (cardId, normalizedCardInfo) => {
     const response = await axios.put(apiUrl + `/${cardId}`, normalizedCardInfo);
     return response;
   } catch (error) {
-    throw new Error (error.response.data);
+    throw new Error(error.response.data);
   }
 }
 
 export const deleteCard = async (cardId, bizNumber) => {
   try {
-    return await axios.delete(apiUrl + `/${cardId}`, {"bizNumber": bizNumber});
+    return await axios.delete(apiUrl + `/${cardId}`, { "bizNumber": bizNumber });
   } catch (error) {
-    throw new Error (error.response.data);
+    throw new Error(error.response.data);
   }
 }
 
@@ -39,7 +39,7 @@ export const getAllMyCards = async () => {
   try {
     return await axios.get(apiUrl + `/my-cards`);
   } catch (error) {
-    throw new Error (error.response.data);
+    throw new Error(error.response.data);
   }
 }
 
@@ -47,6 +47,6 @@ export const likeCard = async (cardId) => {
   try {
     return await axios.patch(apiUrl + `/${cardId}`);
   } catch (error) {
-    throw new Error (error.response.data);
+    throw new Error(error.response.data);
   }
 }
