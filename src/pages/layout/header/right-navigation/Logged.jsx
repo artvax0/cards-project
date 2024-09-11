@@ -1,5 +1,5 @@
 import { Avatar, IconButton, Menu, MenuItem, Tooltip } from '@mui/material'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import LogoutIcon from '@mui/icons-material/Logout';
 import useUsers from '../../../../hooks/useUsers';

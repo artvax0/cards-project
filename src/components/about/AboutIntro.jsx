@@ -1,9 +1,7 @@
 import { Box, Grid, Typography } from '@mui/material'
 import React from 'react'
-import { useTheme } from '../../providers/CustomThemeProvider';
 
 export default function AboutIntro() {
-  const { isDark } = useTheme();
   return (
     <>
       <Grid item xs={12}>

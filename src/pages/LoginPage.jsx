@@ -12,7 +12,7 @@ import LoginForm from '../components/forms/LoginForm';
 export default function LoginPage() {
   const { user } = useCurrentUser();
   if (user) return <Navigate to={ROUTES.ROOT} replace />
-  const { isLoading, handleLogin } = useUsers();
+  const { handleLogin } = useUsers();
 
   const { data, errors, handleChange, handleReset, validateForm, onSubmit } = useForm(initialLoginForm, loginSchema, handleLogin);
 

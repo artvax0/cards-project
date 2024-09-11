@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useParams } from "react-router-dom";
-import { Box, Container, Divider, Grid, Link, Paper, Typography } from '@mui/material';
+import { Box, Container, Divider, Link, Paper, Typography } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { pink } from '@mui/material/colors';
-import PageHeader from '../components/PageHeader';
 import Spinner from '../components/Spinner';
 import Error from '../components/Error';
 import useCards from '../hooks/useCards';

@@ -1,5 +1,5 @@
 import { Box, FormControl, InputAdornment, OutlinedInput } from '@mui/material'
-import React, { memo, useCallback, useEffect } from 'react'
+import React, { memo, useCallback } from 'react'
 import { useTheme } from '../../../../providers/CustomThemeProvider'
 import { useLocation, useSearchParams } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
