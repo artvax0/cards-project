@@ -15,7 +15,6 @@ export default function LeftNavBar() {
         <Logo />
         <NavBarItem to={ROUTES.CARDS} label={'Home'} sx={{ color: isDark ? '#EEEEEE' : '#222831', display: { xs: 'none', md: 'inline-flex' } }} />
         <NavBarItem to={ROUTES.ABOUT} label={'About'} sx={{ color: isDark ? '#EEEEEE' : '#222831', display: { xs: 'none', md: 'inline-flex' } }} />
-        <NavBarItem to={ROUTES.SANDBOX} label={'Sandbox'} sx={{ color: isDark ? '#EEEEEE' : '#222831', display: { xs: 'none', md: 'inline-flex' } }} />
       </Box>
     </Box>
   )
