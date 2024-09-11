@@ -32,8 +32,12 @@ export default function EditCardPage() {
 
   if (isLoading) return <Spinner />;
   if (error) return <Error errorMessage={error} />;
-
-  if (!card || user._id !== card.user_id) return <Navigate to={ROUTES.ROOT} replace />
+  console.log(user)
+  if (!card) {
+    if (user.isAdmin) {
+      return;
+    } else if (user._id !== card.user_id) return <Navigate to={ROUTES.ROOT} replace />;
+  }
 
   return (
 
