@@ -4,7 +4,7 @@ import axios from 'axios'
 import { likeCard, getAllMyCards, deleteCard, editCard, newCard, getCards } from "../services/cardApiService";
 import normalizeCard from "../helpers/normalization/normalizeCard";
 import useAxios from "./useAxios";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { useCurrentUser } from "../providers/UserProvider";
 
 export default function useCards() {
@@ -16,6 +16,7 @@ export default function useCards() {
     const navigate = useNavigate();
     const { user } = useCurrentUser();
     const [searchParams] = useSearchParams();
+    const location = useLocation();
     const filteredCards = useMemo(() => allCards.filter((card) => card.title.includes(searchParams.get('q') || '')), [allCards, searchParams]);
     useAxios();
 
@@ -104,7 +105,11 @@ export default function useCards() {
 
             if (response.status >= 200 && response.status < 300) {
                 setSnack('success', 'Card Deleted!');
-                getAllCards();
+                if (location.pathname == '/my-cards') {
+                    getMyCards();
+                } else {
+                    getAllCards();
+                }
             }
         } catch (error) {
             setError(error.message);
