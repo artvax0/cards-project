@@ -104,7 +104,7 @@ export default function useCards() {
 
             if (response.status >= 200 && response.status < 300) {
                 setSnack('success', 'Card Deleted!');
-                setAllCards(prevCards => prevCards.filter(card => card.id != cardId));
+                getAllCards();
             }
         } catch (error) {
             setError(error.message);
