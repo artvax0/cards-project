@@ -35,18 +35,6 @@ export default function MenuDrawer({ isOpen, setIsOpen }) {
               <ListItemText>About</ListItemText>
             </ListItemButton>
           </NavBarLink>
-          {
-            user?.isAdmin && (
-              <>
-                <Divider variant='middle' />
-                <NavBarLink to={ROUTES.SANDBOX}>
-                  <ListItemButton onClick={() => setIsOpen(false)} sx={{ color: isDark ? '#EEEEEE' : '#222831' }}>
-                    <ListItemIcon><InfoIcon /></ListItemIcon>
-                    <ListItemText>About</ListItemText>
-                  </ListItemButton>
-                </NavBarLink>
-              </>)
-          }
         </Box>
         <Box display='flex' justifyContent='center'>
           <IconButton sx={{ ml: 1 }} onClick={toggleDarkMode}>
