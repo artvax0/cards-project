@@ -35,6 +35,7 @@ export default function ErrorPage() {
                 <NavBarItem
                   to={ROUTES.ROOT}
                   label='return home'
+                  sx={{ color: isDark ? '#EEEEEE' : '#222831' }}
                 />
               </Box>
             </Grid>
