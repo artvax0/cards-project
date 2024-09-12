@@ -24,8 +24,7 @@ export default function CardsDetailsPage() {
   }, [id]);
 
   if (isLoading) return <Spinner />;
-  if (error) return <Error errorMessage={error} />;
-  console.log(card);
+  if (error) return <Error errorMessage={error} />; 6
   return (
     <Box flexGrow='1' display='flex' alignItems='center' justifyContent='center' py={3}>
       <Paper sx={{ backgroundColor: isDark ? '#171717' : '#FFF', display: 'flex', gap: 3, mx: 7, borderRadius: 5, maxHeight: { xs: 'auto', md: '600px' }, flexDirection: { xs: 'column', md: 'row' } }}>

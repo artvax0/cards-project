@@ -139,7 +139,6 @@ export default function useCards() {
                 setSnack('success', 'Cards loaded!');
             }
         } catch (error) {
-            console.log(error)
             setError(error.message);
             setSnack('error', error.message);
         }

@@ -32,7 +32,6 @@ export default function EditCardPage() {
 
   if (isLoading) return <Spinner />;
   if (error) return <Error errorMessage={error} />;
-  console.log(user)
   if (!card) {
     if (user.isAdmin) {
       return;
