@@ -1,4 +1,4 @@
-import { Box, Divider, Drawer, IconButton, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
+import { Box, Drawer, IconButton, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import React from 'react'
 import { useTheme } from '../../../../providers/CustomThemeProvider';
 import { useCurrentUser } from '../../../../providers/UserProvider';

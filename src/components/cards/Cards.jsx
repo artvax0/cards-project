@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import CardComponent from './CardComponent';
-import { Box, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../routes/routesModel';
 

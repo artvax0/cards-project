@@ -1,5 +1,5 @@
 import { Container, Grid } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useCurrentUser } from '../providers/UserProvider'
 import { Navigate, useParams } from 'react-router-dom'
 import { ROUTES } from '../routes/routesModel'

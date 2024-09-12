@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react"
+import { useCallback, useMemo, useState } from "react"
 import { useSnack } from "../providers/SnackbarProvider";
 import axios from 'axios'
 import { likeCard, getAllMyCards, deleteCard, editCard, newCard, getCards } from "../services/cardApiService";
