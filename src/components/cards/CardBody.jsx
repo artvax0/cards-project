@@ -6,15 +6,18 @@ import PlaceIcon from '@mui/icons-material/Place';
 
 export default function CardBody({ phone, street, houseNumber, city, state, country, zip, email, web }) {
     return (
-        <CardContent>
-            <Box component="div" display="flex" className="phoneNumber" sx={{ mt: 1 }}>
-                <Typography variant="body1" paragraph sx={{ display: 'flex', alignItems: 'center' }}><PhoneIcon /> &nbsp; {phone}</Typography>
+        <CardContent sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+            <Box component="div" display="flex" className="phoneNumber" alignItems='center' sx={{ mt: 1 }}>
+                <PhoneIcon />
+                <Typography variant="body1" paragraph mb={0} sx={{ display: 'flex', alignItems: 'center' }}> &nbsp; {phone}</Typography>
             </Box>
-            <Box component="div" display="flex" className="email">
-                <Typography variant="body1" paragraph sx={{ display: 'flex', alignItems: 'center' }}><EmailIcon /> &nbsp; {email}</Typography>
+            <Box component="div" display="flex" className="email" alignItems='center'>
+                <EmailIcon />
+                <Typography variant="body1" paragraph mb={0} sx={{ display: 'flex', alignItems: 'center' }}> &nbsp; {email}</Typography>
             </Box>
-            <Box component="div" display="flex" className="address">
-                <Typography variant="body1" paragraph sx={{ display: 'flex', alignItems: 'center' }}><PlaceIcon /> &nbsp; {street} {houseNumber}, {city}, {state ? state + ', ' : null} {country} {zip ? '| ' + zip : null}</Typography>
+            <Box component="div" display="flex" className="address" alignItems='center'>
+                <PlaceIcon />
+                <Typography variant="body1" paragraph mb={0} sx={{ display: 'flex', alignItems: 'center' }}> &nbsp; {street} {houseNumber}, {city}, {state ? state + ', ' : null} {country} {zip ? '| ' + zip : null}</Typography>
             </Box>
             <Link href='#' underline='hover' variant="body2">{web}</Link>
         </CardContent>
