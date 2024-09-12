@@ -12,7 +12,7 @@ const initialCardForm = {
     city: '',
     street: '',
     houseNumber: 1,
-    zip: 0,
+    zip: 1,
 }
 
 export default initialCardForm;
