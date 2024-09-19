@@ -8,7 +8,7 @@ const Transition = forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function CardActionBar({ handleDel, handleLike, handleEdit, likes, cardId, userId }) {
+export default function CardActionBar({ phone, handleDel, handleLike, handleEdit, likes, cardId, userId }) {
     const { user } = useCurrentUser();
     const likeColor = pink[500];
     const [isLiked, setIsLiked] = useState(false);
@@ -35,6 +35,10 @@ export default function CardActionBar({ handleDel, handleLike, handleEdit, likes
 
     const canEditOrDelete = useMemo(() => user?.isAdmin || user?._id == userId, [user, userId])
 
+    const call = useCallback(() => {
+        window.location.href = `tel:+${phone}`;
+    }, [])
+
     return (
         <>
             <CardActions sx={{ justifyContent: 'space-between' }}>
@@ -53,7 +57,7 @@ export default function CardActionBar({ handleDel, handleLike, handleEdit, likes
                     }
                 </Box>
                 <Box>
-                    <IconButton aria-label='call'>
+                    <IconButton aria-label='call' onClick={call}>
                         <PhoneIcon />
                     </IconButton>
                     {
