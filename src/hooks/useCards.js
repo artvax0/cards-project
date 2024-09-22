@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useState } from "react"
 import { useSnack } from "../providers/SnackbarProvider";
 import axios from 'axios'
-import { likeCard, getAllMyCards, deleteCard, editCard, newCard, getCards } from "../services/cardApiService";
+import { likeCard, getAllMyCards, deleteCard, editCard, newCard, getCards, getACardById } from "../services/cardApiService";
 import normalizeCard from "../helpers/normalization/normalizeCard";
 import useAxios from "./useAxios";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
@@ -36,7 +36,7 @@ export default function useCards() {
 
     const getCardById = useCallback(async (id, snackStatus = 'success', snackMsg = 'Card Loaded!') => {
         try {
-            const { data } = await axios.get(`https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards/${id}`);
+            const { data } = await getACardById(id);
             setCard(data);
             setSnack(snackStatus, snackMsg);
             setIsLoading(false);

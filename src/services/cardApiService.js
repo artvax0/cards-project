@@ -9,6 +9,15 @@ export const getCards = async () => {
   }
 }
 
+export const getACardById = async (cardId) => {
+  try {
+    const response = await axios.get(apiUrl + `/${cardId}`)
+    return response;
+  } catch (error) {
+    throw new Error(error.response.data);
+  }
+}
+
 export const newCard = async (normalizedCardInfo) => {
   try {
     const response = await axios.post(apiUrl, normalizedCardInfo);
