@@ -14,7 +14,6 @@ export default function CardActionBar({ phone, handleDel, handleLike, handleEdit
     const [isLiked, setIsLiked] = useState(false);
 
     useEffect(() => {
-        console.log(user);
         if (user && likes.includes(user._id)) setIsLiked(true);
     }, [likes]);
 
